@@ -19,8 +19,6 @@ const spriteX = 0; // Colonne du sprite souhaité (0 = premier sprite)
 const spriteY = 0; // Ligne du sprite souhaité (0 = première ligne)
 
 spriteSheet.onload = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Nettoyer le canvas avant de dessiner
-
     ctx.drawImage(
         spriteSheet,
         spriteX * spriteWidth, spriteY * spriteHeight, // Coordonnées dans l'image source
@@ -29,3 +27,16 @@ spriteSheet.onload = () => {
         spriteWidth, spriteHeight // Taille finale affichée
     );
 };
+
+
+function drawPlayer(posX, posY) {
+    ctx.drawImage(
+        spriteSheet,
+        spriteX * spriteWidth, spriteY * spriteHeight, // partie de la spritesheet à prendre
+        spriteWidth, spriteHeight,                     // taille du morceau
+        posX - spriteWidth / 2, posY - spriteHeight / 2, // position sur le canvas
+        spriteWidth, spriteHeight                      // taille à afficher
+    );
+}
+
+//Fonction Game loop a créer 
