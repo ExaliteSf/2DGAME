@@ -10,26 +10,35 @@ canvas.width = 320; //définition de la largeur
 canvas.height = 320; // définition de la hauteur 
 
 const spriteSheet = new Image(); // Déclaration de spriteSheet comme étant une image
-spriteSheet.src = "../assets/sprites/character.png"; // Chemin d'accès au sprite 
+spriteSheet.src = "/2DGAME/assets/sprites/character.png"; // Chemin d'accès au sprite 
 
 const spriteWidth = 16;  // Largeur d'un sprite unique
 const spriteHeight = 32; // Hauteur d'un sprite unique en PX
 
 const spriteX = 0; // Colonne du sprite souhaité (0 = premier sprite)
-const spriteY = 0; // Ligne du sprite souhaité (0 = première ligne)
+
 
 spriteSheet.onload = () => {
-    ctx.drawImage(
-        spriteSheet,
-        spriteX * spriteWidth, spriteY * spriteHeight, // Coordonnées dans l'image source
-        spriteWidth, spriteHeight, // Taille de la portion à découper
-        canvas.width / 2 - spriteWidth / 2, canvas.height / 2 - spriteHeight / 2, // Position sur le canvas
-        spriteWidth, spriteHeight // Taille finale affichée
-    );
+    gameLoop()
+    //console.log("Image chargée !");
+
 };
 
 
 function drawPlayer(posX, posY) {
+    let spriteY = 0; // Ligne du sprite souhaité (0 = première ligne)
+    if (direction === "down") {
+        spriteY = 0
+    }
+    if (direction === "right") {
+        spriteY = 1
+    }
+    if (direction === "up") {
+        spriteY = 2
+    }
+    if (direction === "left") {
+        spriteY = 3
+    };
     ctx.drawImage(
         spriteSheet,
         spriteX * spriteWidth, spriteY * spriteHeight, // partie de la spritesheet à prendre
@@ -39,4 +48,11 @@ function drawPlayer(posX, posY) {
     );
 }
 
-//Fonction Game loop a créer 
+//Fonction Game loop
+
+function gameLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    updatePlayer(key)
+    drawPlayer(posX, posY)
+    requestAnimationFrame(gameLoop) // Fonction Native qui re appelle une fonction avant un refresh de l'écran 
+}

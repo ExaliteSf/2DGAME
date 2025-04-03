@@ -44,21 +44,27 @@ addEventListener("keyup", function(event) { // Fonction Listen qui ecoute si les
     }
 });
 
-let posX = 160
+let posX = 160;
 
-let posY = 160
+let posY = 160;
+
+direction = "" // Aucun let ou const car on veut en faire une variable golbale et accèssible par d'autres fichiers 
 
 function updatePlayer (key) { // function qui maj le joueur en fonction de la touche appuyée
     if(key.ArrowUp === true) {
+        direction = "up"
         posY -= 1
     }
     if(key.ArrowDown === true){
+        direction = "down"
         posY +=1 
     }
     if(key.ArrowRight === true) {
+        direction = "right"
         posX +=1
     } 
     if(key.ArrowLeft === true) {
+        direction = "left"
         posX -= 1
     }
 }
