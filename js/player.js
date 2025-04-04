@@ -66,7 +66,21 @@ function updatePlayer (key) { // function qui maj le joueur en fonction de la to
     if(key.ArrowLeft === true) {
         direction = "left"
         posX -= 1
+    } 
+    if(key.e === true && isAttacking === false){
+        isAttacking = true
+        frameIndex = 0
+        key.e = false
     }
 }
 
+// Gestion de l'animation de l'attaque :
+
+isAttacking = false;
+
+addEventListener("keydown", function(event) { // Fonction Listen qui ecoute si les touches sont en état relachés
+    if (event.key === "e") {
+        key.e = true;
+    }
+});
 
