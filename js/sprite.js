@@ -15,7 +15,7 @@ spriteSheet.src = "/2DGAME/assets/sprites/character.png"; // Chemin d'accès au 
 const spriteWidth = 16;  // Largeur d'un sprite unique
 const spriteHeight = 32; // Hauteur d'un sprite unique en PX
 
-const spriteX = 0; // Colonne du sprite souhaité (0 = premier sprite)
+let spriteX = 0; // Colonne du sprite souhaité (0 = premier sprite)
 
 
 spriteSheet.onload = () => {
@@ -39,6 +39,11 @@ function drawPlayer(posX, posY) {
     if (direction === "left") {
         spriteY = 3
     };
+
+    if (key.ArrowUp || key.ArrowDown || key.ArrowLeft || key.ArrowRight) {
+        spriteX = frameIndex
+    }
+
     ctx.drawImage(
         spriteSheet,
         spriteX * spriteWidth, spriteY * spriteHeight, // partie de la spritesheet à prendre
@@ -53,6 +58,13 @@ function drawPlayer(posX, posY) {
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     updatePlayer(key)
+    if(key.ArrowUp === true || key.ArrowDown === true || key.ArrowLeft === true || key.ArrowRight === true) {
+        frameIndex +=1
+    }
+    if (frameIndex >3) {
+        frameIndex = 0 
+    }
+    console.log(frameIndex)
     drawPlayer(posX, posY)
     requestAnimationFrame(gameLoop) // Fonction Native qui re appelle une fonction avant un refresh de l'écran 
 }

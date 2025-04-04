@@ -3,7 +3,7 @@
  */
 
 
-var frameIndex = 0
+frameIndex = 0
 
 
 
