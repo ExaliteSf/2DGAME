@@ -5,6 +5,9 @@
 
 frameIndex = 0
 
+const attackSound = new Audio("/2DGAME/assets/sounds/swordSound.mp3"); // son de l'attaque a l'épée
+let lastAttackTime = 0;
+
 
 
 let key = { // Variable key qui part défaut décrete que la touche est relachée
@@ -67,10 +70,14 @@ function updatePlayer (key) { // function qui maj le joueur en fonction de la to
         direction = "left"
         posX -= 1
     } 
-    if(key.e === true && isAttacking === false){
-        isAttacking = true
-        frameIndex = 0
-        key.e = false
+    if (key.e === true && isAttacking === false && Date.now() - lastAttackTime > 1000) {
+        isAttacking = true;
+        frameIndex = 0;
+        key.e = false;
+    
+        lastAttackTime = Date.now();
+        attackSound.currentTime = 0;
+        attackSound.play();
     }
 }
 
@@ -81,6 +88,7 @@ isAttacking = false;
 addEventListener("keydown", function(event) { // Fonction Listen qui ecoute si les touches sont en état relachés
     if (event.key === "e") {
         key.e = true;
+
     }
 });
 
